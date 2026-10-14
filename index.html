@@ -120,7 +120,7 @@
             font-size: 1.1rem;
         }
 
-        /* Grid de Contenido */
+        /* Grid de Contenido (Música y Cine) */
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -149,22 +149,24 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Contenedor Responsive para Iframes */
+        /* Contenedor Responsive para Iframes (Videos/Audios) */
         .iframe-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 para videos */
+            padding-bottom: 56.25%; /* Proporción 16:9 para videos */
             background-color: #000;
         }
 
-        /* Contenedor específico para el widget de Spotify */
-        .spotify-container {
-            padding: 1rem;
-            background-color: #000;
+        .iframe-container.audio {
+            padding-bottom: 152px; /* Altura estándar para embeds de Spotify */
         }
 
-        .iframe-container iframe, .spotify-container iframe {
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
             border: 0;
         }
 
@@ -240,7 +242,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; 
+                display: none; /* Para móviles podrías agregar un menú hamburguesa luego */
             }
             #inicio h1 {
                 font-size: 2.5rem;
@@ -275,3 +277,100 @@
 
     <section id="musica">
         <h2>Mi Música</h2>
+        <div class="content-grid">
+            <!-- Tarjeta Canción 1 -->
+            <div class="media-card">
+                <div class="iframe-container audio">
+                    <!-- REEMPLAZA EL SRC con tu enlace de Spotify o SoundCloud -->
+                    <iframe src="https://open.spotify.com/embed/track/xyz" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="media-info">
+                    <h3>Último Lanzamiento</h3>
+                    <p>Producción en FL Studio fusionando R&B y ritmos urbanos.</p>
+                </div>
+            </div>
+            
+            <!-- Tarjeta Canción 2 -->
+            <div class="media-card">
+                <div class="iframe-container audio">
+                    <!-- REEMPLAZA EL SRC con tu enlace de Spotify o SoundCloud -->
+                    <iframe src="https://open.spotify.com/embed/track/abc" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="media-info">
+                    <h3>Beat Cinemático</h3>
+                    <p>Instrumental atmosférica con arreglos de piano.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cine">
+        <h2>Cine & Arte</h2>
+        <div class="content-grid">
+            <!-- Tarjeta Ensayo 1 -->
+            <div class="media-card">
+                <div class="iframe-container">
+                    <!-- REEMPLAZA EL SRC con tu enlace de YouTube -->
+                    <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="media-info">
+                    <h3>Análisis: Whiplash</h3>
+                    <p>Un ensayo visual sobre la obsesión y el precio de la grandeza en la música.</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta Ensayo 2 -->
+            <div class="media-card">
+                <div class="iframe-container">
+                    <!-- REEMPLAZA EL SRC con tu enlace de YouTube -->
+                    <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="media-info">
+                    <h3>Análisis: Uncut Gems</h3>
+                    <p>La tensión narrativa y la ambición desmedida a través del montaje.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contact-container">
+            <form id="contactForm" onsubmit="enviarMensaje(event)">
+                <input type="text" id="nombre" placeholder="Tu Nombre" required>
+                <input type="email" id="email" placeholder="Tu Correo Electrónico" required>
+                <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+                <div id="mensajeExito" class="form-message">¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.</div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ked Seam. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para simular el envío del formulario
+        function enviarMensaje(event) {
+            event.preventDefault(); // Evita que la página se recargue
+            
+            // Oculta el botón y muestra el mensaje de éxito
+            const boton = event.target.querySelector('button');
+            const mensajeExito = document.getElementById('mensajeExito');
+            
+            boton.style.display = 'none';
+            mensajeExito.style.display = 'block';
+            
+            // Limpia los campos del formulario
+            event.target.reset();
+
+            // Vuelve a mostrar el botón después de 3 segundos
+            setTimeout(() => {
+                boton.style.display = 'block';
+                mensajeExito.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
